@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const userRouter = require("./users/userRoutes");
+const contactsRouter = require("./contacts/contactsRoutes");
 const PORT = 3030;
 
-module.exports = class UserServer {
+module.exports = class ContactsServer {
   constructor() {
     this.server = null;
   }
@@ -23,7 +23,7 @@ module.exports = class UserServer {
     this.server.use(cors({ origin: "http://localhost:3030" }));
   }
   initRoutes() {
-    this.server.use("/users", userRouter);
+    this.server.use("/contacts", contactsRouter);
   }
   startListening() {
     this.server.listen(PORT, () => {

@@ -53,7 +53,7 @@ module.exports = class ApiRequests {
       name: Joi.string(),
       email: Joi.string(),
       phone: Joi.string(),
-    });
+    }).min(1);
     const result = contactsRules.validate(req.body);
     if (result.error) {
       return res.status(400).send(result.error);
