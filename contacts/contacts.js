@@ -41,7 +41,7 @@ function addContact(name, email, phone) {
 function updateContact(contactId, data) {
   const contacts = require(contactsPath);
   const listBefore = listContacts();
-  const contactIndex = listBefore.findIndex((user) => user.id == contactId);
+  const contactIndex = listBefore.findIndex((contact) => contact.id == contactId);
   contacts[contactIndex] = {
     ...contacts[contactIndex],
     ...data,
