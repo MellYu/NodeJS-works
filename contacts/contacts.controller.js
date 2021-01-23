@@ -3,7 +3,6 @@ const {
 } = require("mongoose");
 const Joi = require("joi");
 const Contact = require("./Contact");
-const { func } = require("joi");
 
 async function getContacts(req, res) {
   const data = await Contact.find();
@@ -36,6 +35,23 @@ function validateContact(req, res, next) {
   if (validationResult.error) {
     return res.status(400).send(validationResult.error);
   }
+  next();
+}
+
+function validateUpdateContact(req, res, next){
+  const validationUpdateRules = Joi.object({
+    name: Joi.string(),
+    email: Joi.string(),
+    password: Joi.string(),
+    phone: Joi.number(),
+    subscription: Joi.string(),
+    token: Joi.string(),
+  }).min(1);
+  const result = validationUpdateRules.validate(req.body);
+  if (result.error) {
+    return res.status(400).send(result.error);
+  }
+
   next();
 }
 
@@ -100,4 +116,5 @@ module.exports = {
   validateContact,
   updateContact,
   deleteContact,
+  validateUpdateContact,
 };
